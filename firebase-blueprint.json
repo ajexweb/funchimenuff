@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Registered player profile, coin balance, and game statistics.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "avatarId": { "type": "string" },
+        "coins": { "type": "integer" },
+        "xp": { "type": "integer" },
+        "level": { "type": "integer" },
+        "matchesPlayed": { "type": "integer" },
+        "matchesWon": { "type": "integer" },
+        "lastDailyRewardTimestamp": { "type": "integer" },
+        "activeBoxSkin": { "type": "string" },
+        "ownedSkins": { "type": "array" },
+        "inventoryRadar": { "type": "integer" },
+        "inventoryExtraGuess": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "displayName", "coins", "xp", "level"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Multiplayer match waiting room with wager and invite code.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "hostId": { "type": "string" },
+        "hostName": { "type": "string" },
+        "guestId": { "type": "string" },
+        "guestName": { "type": "string" },
+        "wager": { "type": "integer" },
+        "status": { "type": "string", "enum": ["WAITING", "READY", "IN_MATCH", "COMPLETED"] },
+        "activeMatchId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "code", "hostId", "hostName", "wager", "status"]
+    },
+    "Match": {
+      "title": "Match",
+      "description": "Live 10-box hide-and-seek match session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "roomId": { "type": "string" },
+        "wager": { "type": "integer" },
+        "pot": { "type": "integer" },
+        "hiderId": { "type": "string" },
+        "seekerId": { "type": "string" },
+        "hiderName": { "type": "string" },
+        "seekerName": { "type": "string" },
+        "hiddenBox": { "type": "integer" },
+        "guesses": { "type": "array" },
+        "hidingDeadline": { "type": "integer" },
+        "status": { "type": "string", "enum": ["HIDING", "SEEKING", "SEEKER_WON", "HIDER_WON", "DRAW"] },
+        "winnerId": { "type": "string" },
+        "seekerRadarUsed": { "type": "boolean" },
+        "radarRevealedBoxes": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "roomId", "wager", "pot", "hiderId", "seekerId", "status"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Live in-game quick message or emote sent during a match.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "matchId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "isEmote": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "matchId", "senderId", "senderName", "text"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile, balance, inventory, and stats."
+    },
+    "/rooms/{roomId}": {
+      "schema": { "$ref": "#/entities/Room" },
+      "description": "Match rooms waiting for friend code or matchmaking."
+    },
+    "/matches/{matchId}": {
+      "schema": { "$ref": "#/entities/Match" },
+      "description": "Active game state for the 10-box hide-and-seek contest."
+    },
+    "/matches/{matchId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Real-time chat messages between players in a match."
+    }
+  }
+}

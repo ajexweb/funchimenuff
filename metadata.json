@@ -1,0 +1,6 @@
+{
+  "name": "BoxHunter",
+  "description": "Real-time multiplayer 10-box hide-and-seek coin wager game with rooms, live chat, and global leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

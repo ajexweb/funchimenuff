@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Apple Luxury Vault Box (Pure Black on White) -->
+    <path
+        android:pathData="M32,42 L76,42 L80,72 L28,72 Z"
+        android:fillColor="#000000" />
+    <path
+        android:pathData="M26,34 L82,34 L76,42 L32,42 Z"
+        android:fillColor="#1C1C1E" />
+    <!-- White Minimal Center Lock Circle -->
+    <path
+        android:pathData="M54,58m-11,0a11,11 0 1,1 22,0a11,11 0 1,1 -22,0"
+        android:fillColor="#FFFFFF" />
+    <path
+        android:pathData="M54,58m-6,0a6,6 0 1,1 12,0a6,6 0 1,1 -12,0"
+        android:fillColor="#000000" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,56 L54,61"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5" />
+</vector>
